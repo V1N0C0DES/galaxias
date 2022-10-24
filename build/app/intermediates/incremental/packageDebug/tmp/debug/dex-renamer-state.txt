@@ -1,0 +1,4 @@
+#Mon Oct 24 22:59:17 BST 2022
+base.0=/Users/vino/Desktop/galaxias/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
