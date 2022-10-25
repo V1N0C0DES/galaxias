@@ -41,87 +41,80 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     String? swipeDirection;
-    return Stack(
-      children: [
-        MyAnimation(),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          MyAnimation(),
+          Stack(
             children: [
-              Expanded(
-                child: FadeAnimation(
-                  delay: 1,
-                  child: PageView.builder(
-                    controller: PageController(viewportFraction: 0.8),
-                    itemCount: planets.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      final planet = planets[index];
-                      final isCurrentPage = index == this.index;
-                      return GestureDetector(
-                        // onTap: () {
-                        //   Navigator.of(context).push(
-                        //     PageRouteBuilder(
-                        //       pageBuilder: (context, animation, _) {
-                        //         return DetailsShoesPage(shoes: shoes);
-                        //       },
-                        //     ),
-                        //   );
-                        // },
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 26, right: index == index ? 20.0 : 60.0),
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              return AnimatedContainer(
-                                duration: const Duration(milliseconds: 250),
-                                margin: EdgeInsets.only(
-                                  top: index == index ? 10 : 100,
-                                  bottom: 10,
-                                ),
-                                child: Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Positioned(
-                                      top: constraints.maxHeight * 0.1,
-                                      right: constraints.maxWidth * 0.4
-                                      ,
-                                      child: Text(
-                                        planet.name,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
+              PageView.builder(
+                controller: PageController(viewportFraction: 0.8),
+                itemCount: planets.length,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final planet = planets[index];
+                  final isCurrentPage = index == this.index;
+                  return GestureDetector(
+                    // onTap: () {
+                    //   Navigator.of(context).push(
+                    //     PageRouteBuilder(
+                    //       pageBuilder: (context, animation, _) {
+                    //         return DetailsShoesPage(shoes: shoes);
+                    //       },
+                    //     ),
+                    //   );
+                    // },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: 26, right: index == index ? 20.0 : 60.0),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 250),
+                            margin: EdgeInsets.only(
+                              top: index == index ? 10 : 100,
+                              bottom: MediaQuery.of(context).size.height * 0.1,
+                            ),
+                            child: Column(
+                              children: [
+                                Positioned(
+                                  top: constraints.maxHeight * 0.05,
+                                  right: constraints.maxWidth * 0.4,
+                                  child: Text(
+                                    planet.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w700,
                                     ),
-                                    Positioned(
-                                      top: 250,
-                                      left: 0,
-                                      right: 0,
-                                      child: Hero(
-                                        tag: planet.name,
-                                        child: Image(
-                                          image: AssetImage(planet.homeAsset),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                                Hero(
+                                  tag: planet.name,
+                                  child: Image(
+                                    image: AssetImage(
+                                      planet.homeAsset,
+                                    ),
+                                    height: MediaQuery.of(context).size.height *
+                                        1.5,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
